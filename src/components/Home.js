@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import BrandLogo from '../images/BrandLogo.png';
 
 function ScrollTop(props) {
     const { children, window } = props;
@@ -67,6 +68,9 @@ export default function Home(props) {
             <CssBaseline />
             <AppBar>
                 <Toolbar>
+                    <Box sx={{ height: "100%", mr: "5px" }}>
+                        <img height="100%" src={BrandLogo} alt="TechForing Logo" srcset="" />
+                    </Box>
                     <Box>
                         <Typography variant="h6" component="div">
                             TechForing
