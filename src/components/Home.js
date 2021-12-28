@@ -10,6 +10,10 @@ import Container from '@mui/material/Container';
 import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Zoom from '@mui/material/Zoom';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 function ScrollTop(props) {
     const { children, window } = props;
@@ -63,9 +67,36 @@ export default function Home(props) {
             <CssBaseline />
             <AppBar>
                 <Toolbar>
-                    <Typography variant="h6" component="div">
-                        Home
-                    </Typography>
+                    <Box>
+                        <Typography variant="h6" component="div">
+                            TechForing
+                        </Typography>
+                        <Typography variant="subtitle2" component="div">
+                            Shaping Tomorrow's Cybersecurity
+                        </Typography>
+                    </Box>
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="show 17 new notifications"
+                            color="inherit"
+                        >
+                            <Badge badgeContent={17} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-haspopup="true"
+                            // onClick={handleProfileMenuOpen}
+                            color="inherit"
+                        >
+                            <AccountCircle />
+                        </IconButton>
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Toolbar id="back-to-top-anchor" />
