@@ -14,7 +14,21 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import BrandLogo from '../images/BrandLogo.png';
+import HomeIcon from '../images/NavIcons/Home.png';
+import JobsIcon from '../images/NavIcons/Jobs.png';
+import ConnectionIcon from '../images/NavIcons/Connections.png';
+import MailsIcon from '../images/NavIcons/Mails.png';
+
+const navLinks = [
+    { name: 'Home', link: '/', icon: HomeIcon },
+    { name: 'Jobs', link: '/jobs', icon: JobsIcon },
+    { name: 'Connections', link: '/connections', icon: ConnectionIcon },
+    { name: 'Inbox', link: '/inbox', icon: MailsIcon }
+];
 
 function ScrollTop(props) {
     const { children, window } = props;
@@ -66,7 +80,7 @@ export default function Home(props) {
     return (
         <React.Fragment>
             <CssBaseline />
-            <AppBar>
+            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
                 <Toolbar>
                     <Box sx={{ height: "100%", mr: "5px" }}>
                         <img height="100%" src={BrandLogo} alt="TechForing Logo" srcset="" />
@@ -104,6 +118,27 @@ export default function Home(props) {
                 </Toolbar>
             </AppBar>
             <Toolbar id="back-to-top-anchor" />
+
+            <Drawer
+                variant="permanent"
+                sx={{
+                    width: "70px",
+                    flexShrink: 0,
+                    [ `& .MuiDrawer-paper` ]: { width: "70px", boxSizing: 'border-box' },
+                }}
+            >
+                <Toolbar />
+                <Box sx={{ overflow: 'auto' }}>
+                    <List>
+                        {navLinks.map((links, index) => (
+                            <ListItem alignItems='center' divider button key={`navlinks-${index}`}>
+                                <img src={links.icon} alt={links.name} />
+                            </ListItem>
+
+                        ))}
+                    </List>
+                </Box>
+            </Drawer>
             <Container>
                 <Typography align="center" variant="h4" component="h1" gutterBottom>
                     Welcome to the React Material-UI
