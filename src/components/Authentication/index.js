@@ -10,7 +10,7 @@ import useProvider from '../../hooks/useProvider';
 import Profile from './Profile';
 
 export default function Authentication() {
-    const [ newUser, setNewUser ] = React.useState(true);
+    const [ newUser, setNewUser ] = React.useState(false);
     const { user } = useProvider();
 
     return (

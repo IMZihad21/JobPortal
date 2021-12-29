@@ -6,6 +6,8 @@ import Authentication from './components/Authentication';
 import Header from './components/Header';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
+import Jobs from './components/Jobs';
+import PrivateRoute from './utilities/PrivateRoute';
 import './App.css';
 
 function App() {
@@ -16,8 +18,21 @@ function App() {
       <NavBar />
       <Container sx={{ paddingTop: "65px" }}>
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/authentication" element={<Authentication />} />
+          <Route path="/" element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+          />
+          <Route
+            path="/jobs"
+            element={
+              <PrivateRoute>
+                <Jobs />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Container>
     </React.Fragment>
