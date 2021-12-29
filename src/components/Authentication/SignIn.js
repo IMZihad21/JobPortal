@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import useProvider from '../../hooks/useProvider';
 
 const SignIn = () => {
-    const { handleSignIn } = useProvider();
+    const { handleSignIn, loading } = useProvider();
     const [ error, setError ] = React.useState('')
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -76,6 +76,7 @@ const SignIn = () => {
                     type="submit"
                     fullWidth
                     variant="contained"
+                    disabled={loading}
                     sx={{ mt: 3, mb: 2 }}
                 >
                     Sign In

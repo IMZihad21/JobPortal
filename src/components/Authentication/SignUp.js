@@ -11,8 +11,10 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import useProvider from '../../hooks/useProvider';
 
 export default function SignUp() {
+    const { handleSignUp, loading } = useProvider();
     const [ gender, setGender ] = React.useState('');
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -22,6 +24,7 @@ export default function SignUp() {
             email: data.get('email'),
             password: data.get('password'),
         });
+        handleSignUp();
     };
 
     return (
@@ -132,6 +135,7 @@ export default function SignUp() {
                         type="submit"
                         fullWidth
                         variant="contained"
+                        disabled={loading}
                         sx={{ mt: 3, mb: 2 }}
                     >
                         Sign Up
