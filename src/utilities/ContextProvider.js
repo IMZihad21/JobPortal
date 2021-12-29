@@ -1,9 +1,10 @@
-import React, { createContext } from 'react';
+import React from 'react';
+import useAuth from '../hooks/useAuth';
 
-export const ContextData = createContext();
+export const ContextData = React.createContext();
 
 const ContextProvider = ({ children }) => {
-    const allContext = "Context is working";
+    const allContext = { ...useAuth() };
     return (
         <ContextData.Provider value={allContext}>
             {children}
