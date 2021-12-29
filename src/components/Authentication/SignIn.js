@@ -8,24 +8,13 @@ import Typography from '@mui/material/Typography';
 import useProvider from '../../hooks/useProvider';
 
 const SignIn = () => {
-    const { handleSignIn, loading } = useProvider();
-    const [ error, setError ] = React.useState('')
+    const { handleSignIn, loading, error } = useProvider();
     const handleSubmit = (event) => {
         event.preventDefault();
-        setError('');
         const data = new FormData(event.currentTarget);
         const email = data.get('email');
         const password = data.get('password');
-        if (email === '' || password === '') {
-            setError('Must fill all the fields before sign in.');
-            return;
-        }
-        handleSignIn(email, password)
-            .catch(err => {
-                if (err.response.status === 401) {
-                    setError(err.response.data.detail);
-                };
-            })
+        handleSignIn(email, password);
     };
 
     return (

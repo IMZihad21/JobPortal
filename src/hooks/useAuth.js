@@ -8,6 +8,11 @@ const useAuth = () => {
     const [ error, setError ] = React.useState('')
 
     const handleSignIn = (email, password) => {
+        setError('');
+        if (email === '' || password === '') {
+            setError('Must fill all the fields before sign in.');
+            return;
+        }
         setLoading(true);
         const baseURL = 'https://tf-practical.herokuapp.com/api/login/';
         const payload = {
@@ -19,10 +24,16 @@ const useAuth = () => {
                 setUser(result.data.user);
                 setToken(result.data.access);
                 setLoading(false);
+            })
+            .catch(err => {
+                if (err.response.status === 401) {
+                    setError(err.response.data.detail);
+                };
             });
     };
 
     const handleSignUp = (full_name, phone_number, birthDate, gender, email, password, confirmPassword) => {
+        setError('');
         setLoading(true);
         if (email === '' || password === '' || full_name === '' || phone_number === '') {
             setError('Must fill all the fields before sign in.');
