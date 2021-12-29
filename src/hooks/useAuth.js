@@ -9,6 +9,16 @@ const useAuth = () => {
     const [ error, setError ] = React.useState('');
     const navigate = useNavigate();
 
+    React.useEffect(() => {
+        const user = sessionStorage.getItem('user');
+        const token = sessionStorage.getItem('token');
+        if (user) {
+            setUser(JSON.parse(user));
+            setToken(token);
+            navigate("/jobs");
+        }
+    }, [])
+
     const handleSignIn = (email, password) => {
         setError('');
         if (email === '' || password === '') {
@@ -24,7 +34,9 @@ const useAuth = () => {
         return axios.post(baseURL, payload)
             .then((result) => {
                 setUser(result.data.user);
+                sessionStorage.setItem('user', JSON.stringify(result.data.user));
                 setToken(result.data.access);
+                sessionStorage.setItem('token', result.data.access);
                 setLoading(false);
                 navigate("/jobs");
             })
@@ -75,7 +87,9 @@ const useAuth = () => {
 
     const handleSignOut = () => {
         setUser(null);
+        sessionStorage.setItem('user', null);
         setToken(null);
+        sessionStorage.setItem('token', null);
     };
 
     return {
