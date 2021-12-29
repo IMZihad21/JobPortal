@@ -11,7 +11,6 @@ import useProvider from '../../hooks/useProvider';
 export default function Authentication() {
     const [ newUser, setNewUser ] = React.useState(false);
     const { user } = useProvider();
-    console.log(user);
 
     return (
         <Grid container component="main" sx={{ height: '600px' }}>

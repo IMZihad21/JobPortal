@@ -5,16 +5,26 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import useProvider from '../../hooks/useProvider';
 
 const SignIn = () => {
+    const { handleSignIn } = useProvider();
+    const [ error, setError ] = React.useState('')
     const handleSubmit = (event) => {
         event.preventDefault();
+        setError('');
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const email = data.get('email');
+        const password = data.get('password');
+        if (email === '' || password === '') {
+            setError('Must fill all the fields before sign in.')
+        }
+        handleSignIn(email, password)
+            .catch(err => {
+                if (err.response.status === 401) {
+                    setError(err.response.data.detail);
+                };
+            })
     };
 
     return (
@@ -54,6 +64,14 @@ const SignIn = () => {
                     id="password"
                     autoComplete="current-password"
                 />
+                {
+                    error && <Typography
+                        color="error"
+                        sx={{ textAlign: "center" }}
+                    >
+                        {error}
+                    </Typography>
+                }
                 <Button
                     type="submit"
                     fullWidth
