@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import useProvider from '../../hooks/useProvider';
 
 export default function Authentication() {
     const [ newUser, setNewUser ] = React.useState(false);
