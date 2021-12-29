@@ -5,6 +5,7 @@ const useAuth = () => {
     const [ user, setUser ] = React.useState(null);
     const [ token, setToken ] = React.useState(null);
     const [ loading, setLoading ] = React.useState(false);
+    const [ error, setError ] = React.useState('')
 
     const handleSignIn = (email, password) => {
         setLoading(true);
@@ -21,8 +22,41 @@ const useAuth = () => {
             });
     };
 
-    const handleSignUp = (name, phone, birthday, gender, email, password) => {
-        //
+    const handleSignUp = (full_name, phone_number, birthDate, gender, email, password, confirmPassword) => {
+        setLoading(true);
+        if (email === '' || password === '' || full_name === '' || phone_number === '') {
+            setError('Must fill all the fields before sign in.');
+            return;
+        }
+        if (password !== confirmPassword) {
+            setError("Passwords do not match!");
+            return;
+        }
+        if (password.length < 8) {
+            setError("Password is too short. Minimum 8 characters.");
+            return;
+        }
+        const baseURL = "https://tf-practical.herokuapp.com/api/register/";
+        const payload = {
+            "full_name": full_name,
+            "email": email,
+            "birthDate": birthDate,
+            "gender": gender,
+            "phone_number": phone_number,
+            "password": password
+        };
+
+        axios.post(baseURL, payload)
+            .then((result) => {
+                handleSignIn(email, password);
+            })
+            .catch(err => {
+                console.log(err.response);
+                if (err.response.status === 400) {
+                    setError("Provide valid info to sign up!");
+                    setLoading(false);
+                };
+            });
     };
 
     const handleSignOut = () => {
@@ -34,6 +68,7 @@ const useAuth = () => {
         user,
         token,
         loading,
+        error,
         handleSignIn,
         handleSignUp,
         handleSignOut

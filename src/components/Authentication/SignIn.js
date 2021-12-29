@@ -17,7 +17,8 @@ const SignIn = () => {
         const email = data.get('email');
         const password = data.get('password');
         if (email === '' || password === '') {
-            setError('Must fill all the fields before sign in.')
+            setError('Must fill all the fields before sign in.');
+            return;
         }
         handleSignIn(email, password)
             .catch(err => {

@@ -14,17 +14,19 @@ import MenuItem from '@mui/material/MenuItem';
 import useProvider from '../../hooks/useProvider';
 
 export default function SignUp() {
-    const { handleSignUp, loading } = useProvider();
-    const [ gender, setGender ] = React.useState('');
+    const { handleSignUp, loading, error } = useProvider();
+    const [ gender, setGender ] = React.useState('Male');
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-        handleSignUp();
+        const full_name = data.get('fullName');
+        const phone_number = data.get('phoneNumber');
+        const birthDate = data.get('birthDate');
+        const email = data.get('email');
+        const password = data.get('password');
+        const confirmPassword = data.get('confirmPassword');
+        // console.log(full_name, phone_number, birthDate, gender, email, password);
+        handleSignUp(full_name, phone_number, birthDate, gender, email, password, confirmPassword);
     };
 
     return (
@@ -92,9 +94,9 @@ export default function SignUp() {
                                     label="Gender *"
                                     onChange={(e) => setGender(e.target.value)}
                                 >
-                                    <MenuItem value="male">Male</MenuItem>
-                                    <MenuItem value="female">Female</MenuItem>
-                                    <MenuItem value="others">Others</MenuItem>
+                                    <MenuItem value="Male">Male</MenuItem>
+                                    <MenuItem value="Female">Female</MenuItem>
+                                    <MenuItem value="Other">Others</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -125,12 +127,20 @@ export default function SignUp() {
                                 fullWidth
                                 name="confirmPassword"
                                 label="Confirm Password"
-                                type="confirmPassword"
+                                type="password"
                                 id="confirmPassword"
-                                autoComplete="confirm-password"
+                                autoComplete="new-password"
                             />
                         </Grid>
                     </Grid>
+                    {
+                        error && <Typography
+                            color="error"
+                            sx={{ textAlign: "center" }}
+                        >
+                            {error}
+                        </Typography>
+                    }
                     <Button
                         type="submit"
                         fullWidth
