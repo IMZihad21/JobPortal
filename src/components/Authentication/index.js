@@ -3,15 +3,50 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 export default function Authentication() {
+    const [ newUser, setNewUser ] = React.useState(false);
 
     return (
         <Grid container component="main" sx={{ height: '600px' }}>
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                <SignUp />
+                <Grid container>
+                    <Grid item xs={6}>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            onClick={() => setNewUser(false)}
+                            sx={{
+                                borderRadius: 0,
+                                py: "10px",
+                                backgroundColor: !newUser ? "#000" : "primary.main",
+                                color: newUser ? "secondary" : "#fff"
+                            }}
+                        >
+                            <Typography sx={{ color: !newUser ? "secondary.main" : "#fff" }}>Sign In</Typography>
+                        </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            onClick={() => setNewUser(true)}
+                            sx={{
+                                borderRadius: 0,
+                                py: "10px",
+                                backgroundColor: newUser ? "#000" : "primary.main"
+                            }}
+                        >
+                            <Typography sx={{ color: newUser ? "secondary.main" : "#fff" }}>Sign Up</Typography>
+                        </Button>
+                    </Grid>
+                </Grid>
+                {
+                    newUser ? <SignUp /> : <SignIn />
+                }
             </Grid>
             <Grid item xs={false} sm={4} md={7}>
                 <Box sx={{ textAlign: 'left', mt: "100px", mx: "200px" }}>
