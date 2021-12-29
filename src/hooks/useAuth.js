@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const useAuth = () => {
     const [ user, setUser ] = React.useState(null);
     const [ token, setToken ] = React.useState(null);
     const [ loading, setLoading ] = React.useState(false);
-    const [ error, setError ] = React.useState('')
+    const [ error, setError ] = React.useState('');
+    const navigate = useNavigate();
 
     const handleSignIn = (email, password) => {
         setError('');
@@ -24,6 +26,7 @@ const useAuth = () => {
                 setUser(result.data.user);
                 setToken(result.data.access);
                 setLoading(false);
+                navigate("/jobs");
             })
             .catch(err => {
                 if (err.response.status === 401) {
