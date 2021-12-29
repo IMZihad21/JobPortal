@@ -19,7 +19,7 @@ const Header = () => {
                     to="/"
                     sx={{ height: "100%", mr: "5px" }}
                 >
-                    <img height="100%" src={BrandLogo} alt="TechForing Logo" srcset="" />
+                    <img height="100%" src={BrandLogo} alt="TechForing Logo" />
                 </Box>
                 <Box>
                     <Typography variant="h6" component="div">
