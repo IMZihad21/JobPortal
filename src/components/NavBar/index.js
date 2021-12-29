@@ -8,6 +8,7 @@ import HomeIcon from '../../images/NavIcons/Home.png';
 import JobsIcon from '../../images/NavIcons/Jobs.png';
 import ConnectionIcon from '../../images/NavIcons/Connections.png';
 import MailsIcon from '../../images/NavIcons/Mails.png';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
     { name: 'Home', link: '/', icon: HomeIcon },
@@ -30,7 +31,13 @@ const NavBar = () => {
             <Box sx={{ overflow: 'auto' }}>
                 <List>
                     {navLinks.map((links, index) => (
-                        <ListItem alignItems='center' divider button key={`navlinks-${index}`}>
+                        <ListItem
+                            component={Link}
+                            to={links.link}
+                            alignItems='center'
+                            divider
+                            button
+                            key={`navlinks-${index}`}>
                             <img src={links.icon} alt={links.name} />
                         </ListItem>
 

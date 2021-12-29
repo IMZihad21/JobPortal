@@ -8,12 +8,17 @@ import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import BrandLogo from '../../images/BrandLogo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
         <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
-                <Box sx={{ height: "100%", mr: "5px" }}>
+                <Box
+                    component={Link}
+                    to="/"
+                    sx={{ height: "100%", mr: "5px" }}
+                >
                     <img height="100%" src={BrandLogo} alt="TechForing Logo" srcset="" />
                 </Box>
                 <Box>
@@ -36,6 +41,8 @@ const Header = () => {
                         </Badge>
                     </IconButton>
                     <IconButton
+                        component={Link}
+                        to="/authentication"
                         size="large"
                         edge="end"
                         aria-label="account of current user"
