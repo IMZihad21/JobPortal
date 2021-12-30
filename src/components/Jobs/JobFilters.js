@@ -10,7 +10,7 @@ export const JobFilters = () => {
     return (
         <Box sx={{ display: "flex", justifyContent: "space-evenly", mb: "10px" }}>
             <Box sx={{ width: "180px" }}>
-                <Typography sx={{ fontSize: "20px", mb: "5px" }}>
+                <Typography sx={{ fontSize: "15px", mb: "5px" }}>
                     Search
                 </Typography>
                 <TextField
@@ -27,8 +27,8 @@ export const JobFilters = () => {
                 />
             </Box>
             <Box sx={{ width: "180px" }}>
-                <Typography sx={{ fontSize: "20px", mb: "5px" }}>
-                    Search
+                <Typography sx={{ fontSize: "15px", mb: "5px" }}>
+                    Select By Type
                 </Typography>
                 <TextField
                     id="input-with-icon-textfield"
@@ -44,8 +44,8 @@ export const JobFilters = () => {
                 />
             </Box>
             <Box sx={{ width: "180px" }}>
-                <Typography sx={{ fontSize: "20px", mb: "5px" }}>
-                    Search
+                <Typography sx={{ fontSize: "15px", mb: "5px" }}>
+                    Select By Department
                 </Typography>
                 <TextField
                     id="input-with-icon-textfield"
@@ -61,8 +61,8 @@ export const JobFilters = () => {
                 />
             </Box>
             <Box sx={{ width: "180px" }}>
-                <Typography sx={{ fontSize: "20px", mb: "5px" }}>
-                    Search
+                <Typography sx={{ fontSize: "15px", mb: "5px" }}>
+                    Select By Time
                 </Typography>
                 <TextField
                     id="input-with-icon-textfield"
@@ -78,8 +78,8 @@ export const JobFilters = () => {
                 />
             </Box>
             <Box sx={{ width: "180px" }}>
-                <Typography sx={{ fontSize: "20px", mb: "5px" }}>
-                    Search
+                <Typography sx={{ fontSize: "15px", mb: "5px" }}>
+                    Select By Shift
                 </Typography>
                 <TextField
                     id="input-with-icon-textfield"
@@ -99,7 +99,7 @@ export const JobFilters = () => {
                 <Button
                     variant="contained"
                     color="secondary"
-                    sx={{ color: "#fff", mt: "35px", px: "50px", mx: "auto" }}
+                    sx={{ color: "#fff", mt: "30px", px: "50px", ml: "30px" }}
                 >
                     Filter
                 </Button>

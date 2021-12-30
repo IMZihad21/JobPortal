@@ -7,6 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import axios from 'axios';
+import useProvider from '../../hooks/useProvider';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [ `&.${tableCellClasses.head}` ]: {
@@ -28,41 +31,58 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 export default function JobLists() {
+    const [ jobs, setJobs ] = React.useState([]);
+    const { token } = useProvider();
+    React.useEffect(() => {
+        const baseURL = "https://tf-practical.herokuapp.com/api/job_post/";
+        const config = {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        }
+        axios.get(baseURL, config)
+            .then((result) => {
+                setJobs(result.data);
+            }).catch((err) => {
+                console.log(err.response);
+            });
+    }, [ token ])
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ mt: "50px" }}>
+            <Typography component="h3" variant="h4" sx={{ py: "10px", backgroundColor: "primary.main", color: "#fff", textAlign: "center" }}>
+                Recent Job Posts
+            </Typography>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                        <StyledTableCell align="right">Calories</StyledTableCell>
-                        <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+                        <StyledTableCell>POST NAME</StyledTableCell>
+                        <StyledTableCell align="right">TOTAL APPLICANT</StyledTableCell>
+                        <StyledTableCell align="right">VACANCIES</StyledTableCell>
+                        <StyledTableCell align="right">SHIFT</StyledTableCell>
+                        <StyledTableCell align="right">TYPE</StyledTableCell>
+                        <StyledTableCell align="right">POST DATE</StyledTableCell>
+                        <StyledTableCell align="right">EXPIRE DATE</StyledTableCell>
+                        <StyledTableCell align="right">SALARY</StyledTableCell>
+                        <StyledTableCell align="right">STATUS</StyledTableCell>
+                        <StyledTableCell align="right">ACTIONS</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">
-                                {row.name}
+                    {jobs.map((job) => (
+                        <StyledTableRow key={job.id}>
+                            <StyledTableCell component="th" scope="row" sx={{ width: "140px" }}>
+                                {job?.jobTitle}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                            <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                            <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.applicant ? job.applicant : 0}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.vacancies}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.shift}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.jobType}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.postDate}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.lastDateOfApply}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.salary ? job.salary : "Nagotiable"}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.status ? job.status : "Active"}</StyledTableCell>
+                            <StyledTableCell align="right">actions</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
