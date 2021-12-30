@@ -70,7 +70,7 @@ export default function JobLists({ jobs, setJobs }) {
                             <StyledTableCell align="right">{job?.lastDateOfApply}</StyledTableCell>
                             <StyledTableCell align="right">{job?.salary ? job.salary : "Nagotiable"}</StyledTableCell>
                             <StyledTableCell align="right">
-                                <Typography sx={{ px: "5px", backgroundColor: "primary.main", color: "#fff", borderRadius: "3px" }}>
+                                <Typography sx={{ textAlign: "center", px: "5px", backgroundColor: "primary.main", color: "#fff", borderRadius: "3px" }}>
                                     {(parseInt(job.lastDateOfApply.replace(/-/g, "")) < todayDate) ? "Expired" : "Active"}
                                 </Typography>
                             </StyledTableCell>
