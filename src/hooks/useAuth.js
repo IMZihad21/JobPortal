@@ -15,7 +15,6 @@ const useAuth = () => {
         if (user) {
             setUser(JSON.parse(user));
             setToken(token);
-            navigate("/jobs");
         }
     }, [])
 
