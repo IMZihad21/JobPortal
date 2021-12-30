@@ -34,7 +34,11 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/jobs/:jobId" element={<JobView />} />
+          <Route path="/jobs/:jobId" element={
+            <PrivateRoute>
+              <JobView />
+            </PrivateRoute>
+          } />
         </Routes>
       </Container>
     </React.Fragment>
