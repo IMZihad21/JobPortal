@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-export const JobFilters = () => {
+const JobFilters = () => {
     return (
         <Box sx={{ display: "flex", justifyContent: "space-evenly", mb: "10px" }}>
             <Box sx={{ width: "180px" }}>
@@ -107,3 +107,5 @@ export const JobFilters = () => {
         </Box>
     )
 }
+
+export default JobFilters;
