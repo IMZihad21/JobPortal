@@ -71,8 +71,6 @@ export default function JobCreate({ jobs, setJobs }) {
             }
         };
 
-        console.log(payload);
-
         axios.post(baseURL, payload, config)
             .then((result) => {
                 const newJobList = [ ...jobs, result.data ];
