@@ -99,7 +99,7 @@ const JobFilters = () => {
                 <Button
                     variant="contained"
                     color="secondary"
-                    sx={{ color: "#fff", mt: "30px", px: "50px", ml: "30px" }}
+                    sx={{ color: "#fff", mt: "25px", px: "50px", py: "8px", ml: "30px" }}
                 >
                     Filter
                 </Button>

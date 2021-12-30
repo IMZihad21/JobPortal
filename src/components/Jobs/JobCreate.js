@@ -87,7 +87,7 @@ export default function JobCreate({ jobs, setJobs }) {
 
     return (
         <div>
-            <Box sx={{ display: "flex", mt: "10px" }}>
+            <Box sx={{ display: "flex", mt: "10px", mr: "10px" }}>
                 <Box sx={{ flexGrow: 1 }} />
                 <Button
                     onClick={handleOpen}

@@ -39,7 +39,7 @@ const JobView = () => {
         );
     }
     return (
-        <Container sx={{ m: "50px" }}>
+        <Container sx={{ mt: "10px", borderRadius: "5px", backgroundColor: "#fff" }}>
             <Box sx={{ display: "flex", borderBottom: 1, py: "20px" }}>
                 <Typography component="h4" variant="h6" sx={{ mr: "40px" }}>
                     JOB TITLE

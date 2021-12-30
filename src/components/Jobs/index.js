@@ -24,7 +24,7 @@ const Jobs = () => {
             });
     }, [ token, setJobs ])
     return (
-        <Container>
+        <Container sx={{ backgroundColor: "#fff", height: "90%", mt: "20px", borderRadius: "5px", p: "10px" }}>
             <JobCreate setJobs={setJobs} jobs={jobs} />
             <JobFilters setJobs={setJobs} jobs={jobs} />
             <JobLists setJobs={setJobs} jobs={jobs} />

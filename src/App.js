@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import Authentication from './components/Authentication';
 import Header from './components/Header';
 import NavBar from './components/NavBar';
@@ -17,7 +17,7 @@ function App() {
       <CssBaseline />
       <Header />
       <NavBar />
-      <Container sx={{ paddingTop: "65px" }}>
+      <Box sx={{ pt: "65px", ml: "70px", backgroundColor: "#EFF3F6", height: "100vh" }}>
         <Routes>
           <Route path="/authentication" element={<Authentication />} />
           <Route path="/" element={
@@ -40,7 +40,7 @@ function App() {
             </PrivateRoute>
           } />
         </Routes>
-      </Container>
+      </Box>
     </React.Fragment>
   );
 }

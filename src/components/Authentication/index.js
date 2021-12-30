@@ -14,13 +14,13 @@ export default function Authentication() {
     const { user } = useProvider();
 
     return (
-        <Grid container component="main" sx={{ height: '600px' }}>
+        <Grid container component="main" sx={{ height: '600px', p: "20px" }}>
             {
                 user ?
-                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
                         <Profile />
                     </Grid> :
-                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
                         <Grid container>
                             <Grid item xs={6}>
                                 <Button
@@ -28,7 +28,7 @@ export default function Authentication() {
                                     variant="contained"
                                     onClick={() => setNewUser(false)}
                                     sx={{
-                                        borderRadius: 0,
+                                        borderRadius: "5px 0 0 0",
                                         py: "10px",
                                         backgroundColor: !newUser ? "#000" : "primary.main",
                                         color: newUser ? "secondary" : "#fff"
@@ -43,7 +43,7 @@ export default function Authentication() {
                                     variant="contained"
                                     onClick={() => setNewUser(true)}
                                     sx={{
-                                        borderRadius: 0,
+                                        borderRadius: "0 5px 0 0",
                                         py: "10px",
                                         backgroundColor: newUser ? "#000" : "primary.main"
                                     }}
