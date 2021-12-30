@@ -104,7 +104,7 @@ const JobView = () => {
                 </Typography>
                 <List>
                     {
-                        new Array(5).fill(null).map((val, idx) => <ListItem disablePadding>
+                        new Array(5).fill(null).map((val, idx) => <ListItem disablePadding key={idx}>
                             <ListItemText primary={`${idx + 1}. Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum consequuntur?`} />
                         </ListItem>)
                     }

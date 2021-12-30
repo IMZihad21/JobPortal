@@ -14,6 +14,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import useProvider from '../../hooks/useProvider';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [ `&.${tableCellClasses.head}` ]: {
@@ -36,7 +38,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function JobLists({ jobs, setJobs }) {
+    const { token } = useProvider();
     const todayDate = (new Date()).toISOString().split('T')[ 0 ].replace(/-/g, "");
+    const handleDeleteJob = jobId => {
+        const baseURL = `https://tf-practical.herokuapp.com/api/job_update/${jobId}`;
+        const config = {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        }
+        if (window.confirm("Do you really want to remove this?")) {
+            axios.delete(baseURL, config)
+                .then((result) => {
+                    alert("Successfully deleted this job!")
+                    const newJobs = jobs.filter(job => job.id !== jobId);
+                    setJobs(newJobs);
+                }).catch((err) => {
+                    console.log(err.response);
+                });
+        }
+    };
     return (
         <TableContainer component={Paper} sx={{ mt: "50px" }}>
             <Typography component="h3" variant="h4" sx={{ py: "10px", backgroundColor: "primary.main", color: "#fff", textAlign: "center" }}>
@@ -80,7 +101,7 @@ export default function JobLists({ jobs, setJobs }) {
                                     <IconButton aria-label="fingerprint" color="secondary" size="small">
                                         <EditIcon fontSize="inherit" />
                                     </IconButton>
-                                    <IconButton aria-label="fingerprint" color="error" size="small">
+                                    <IconButton onClick={() => handleDeleteJob(job.id)} aria-label="fingerprint" color="error" size="small">
                                         <DeleteForeverIcon fontSize="inherit" />
                                     </IconButton>
                                     <IconButton component={Link} to={`/jobs/${job.id}`} aria-label="fingerprint" color="info" size="small">
