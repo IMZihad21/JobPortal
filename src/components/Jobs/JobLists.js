@@ -8,8 +8,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import axios from 'axios';
-import useProvider from '../../hooks/useProvider';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
@@ -36,24 +34,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export default function JobLists() {
+export default function JobLists({ jobs, setJobs }) {
     const todayDate = (new Date()).toISOString().split('T')[ 0 ].replace(/-/g, "");
-    const [ jobs, setJobs ] = React.useState([]);
-    const { token } = useProvider();
-    React.useEffect(() => {
-        const baseURL = "https://tf-practical.herokuapp.com/api/job_post/";
-        const config = {
-            headers: {
-                Authorization: "Bearer " + token
-            }
-        }
-        axios.get(baseURL, config)
-            .then((result) => {
-                setJobs(result.data);
-            }).catch((err) => {
-                console.log(err.response);
-            });
-    }, [ token ])
     return (
         <TableContainer component={Paper} sx={{ mt: "50px" }}>
             <Typography component="h3" variant="h4" sx={{ py: "10px", backgroundColor: "primary.main", color: "#fff", textAlign: "center" }}>
@@ -80,9 +62,9 @@ export default function JobLists() {
                             <StyledTableCell component="th" scope="row" sx={{ width: "140px" }}>
                                 {job?.jobTitle}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{job?.applicant ? job.applicant : 0}</StyledTableCell>
+                            <StyledTableCell align="right" sx={{ width: "100px" }}>{job?.applicant ? job.applicant : 0}</StyledTableCell>
                             <StyledTableCell align="right">{job?.vacancies}</StyledTableCell>
-                            <StyledTableCell align="right">{job?.shift}</StyledTableCell>
+                            <StyledTableCell align="right">{job?.shift[ 0 ].toUpperCase() + job?.shift.slice(1)}</StyledTableCell>
                             <StyledTableCell align="right">{job?.jobType}</StyledTableCell>
                             <StyledTableCell align="right">{job?.postDate}</StyledTableCell>
                             <StyledTableCell align="right">{job?.lastDateOfApply}</StyledTableCell>
