@@ -10,6 +10,11 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import useProvider from '../../hooks/useProvider';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [ `&.${tableCellClasses.head}` ]: {
@@ -32,6 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function JobLists() {
+    const todayDate = (new Date()).toISOString().split('T')[ 0 ].replace(/-/g, "");
     const [ jobs, setJobs ] = React.useState([]);
     const { token } = useProvider();
     React.useEffect(() => {
@@ -81,8 +87,24 @@ export default function JobLists() {
                             <StyledTableCell align="right">{job?.postDate}</StyledTableCell>
                             <StyledTableCell align="right">{job?.lastDateOfApply}</StyledTableCell>
                             <StyledTableCell align="right">{job?.salary ? job.salary : "Nagotiable"}</StyledTableCell>
-                            <StyledTableCell align="right">{job?.status ? job.status : "Active"}</StyledTableCell>
-                            <StyledTableCell align="right">actions</StyledTableCell>
+                            <StyledTableCell align="right">
+                                <Typography sx={{ px: "5px", backgroundColor: "primary.main", color: "#fff", borderRadius: "3px" }}>
+                                    {(parseInt(job.lastDateOfApply.replace(/-/g, "")) < todayDate) ? "Expired" : "Active"}
+                                </Typography>
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                                <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                                    <IconButton aria-label="fingerprint" color="secondary" size="small">
+                                        <EditIcon fontSize="inherit" />
+                                    </IconButton>
+                                    <IconButton aria-label="fingerprint" color="error" size="small">
+                                        <DeleteForeverIcon fontSize="inherit" />
+                                    </IconButton>
+                                    <IconButton aria-label="fingerprint" color="info" size="small">
+                                        <VisibilityIcon fontSize="inherit" />
+                                    </IconButton>
+                                </Box>
+                            </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
