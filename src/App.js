@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Jobs from './components/Jobs';
 import PrivateRoute from './utilities/PrivateRoute';
+import JobView from './components/Jobs/JobView';
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/jobs/:jobId" element={<JobView />} />
         </Routes>
       </Container>
     </React.Fragment>

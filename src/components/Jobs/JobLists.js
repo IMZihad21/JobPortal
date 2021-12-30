@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Link } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [ `&.${tableCellClasses.head}` ]: {
@@ -82,7 +83,7 @@ export default function JobLists({ jobs, setJobs }) {
                                     <IconButton aria-label="fingerprint" color="error" size="small">
                                         <DeleteForeverIcon fontSize="inherit" />
                                     </IconButton>
-                                    <IconButton aria-label="fingerprint" color="info" size="small">
+                                    <IconButton component={Link} to={`/jobs/${job.id}`} aria-label="fingerprint" color="info" size="small">
                                         <VisibilityIcon fontSize="inherit" />
                                     </IconButton>
                                 </Box>
