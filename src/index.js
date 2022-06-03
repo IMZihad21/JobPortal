@@ -20,7 +20,7 @@ const theme = createTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/JobPortal'>
       <ThemeProvider theme={theme}>
         <ContextProvider>
           <App />
